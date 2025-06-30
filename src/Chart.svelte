@@ -1,9 +1,9 @@
 <script lang="ts">
     import {Card} from "flowbite-svelte";
     import {Chart as ChartJS, registerables} from "chart.js";
-    import type {Stats,Result} from "./libs";
+    import type {Result} from "./libs";
     
-    let {stats, ranking}:{stats:Stats, ranking:Result[]} = $props();
+    let {ranking}:{ranking:Result[]} = $props();
     let canvas:HTMLCanvasElement;
     const bins = [
         {label:"-64~-49", min:-64, max:-49},
@@ -37,7 +37,7 @@
                     label: '弱さ',
                     data: frequency,
                     borderWidth: 1,
-                    backgroundColor: bins.map( b => b.min>0?'rgba(0, 0, 255, 0.2)':'rgba(255, 0, 0, 0.2)'),
+                    backgroundColor: bins.map( b => b.min>0?'#36A2EB':'#FF6384'),
                 }]
             },
             options: {
@@ -72,6 +72,6 @@
 </script>
 
 <Card class="bg-gray-50 shadow-lg rounded-2xl py-4 pl-4 pr-6 max-w-full">
-    <h2 class="text-xl font-bold mb-2">度数分布</h2>
-    <canvas bind:this={canvas} id="hist" width="100%" height="80%"></canvas>
+    <h2 class="text-xl font-bold mb-2">弱さの度数分布</h2>
+    <canvas bind:this={canvas} width="100%" height="80%"></canvas>
 </Card>

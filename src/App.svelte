@@ -24,7 +24,7 @@
     });
 </script>
 
-<main class="bg-green-100 fixed flex flex-col h-svh p-4">
+<main class="bg-green-100 fixed flex flex-col h-svh w-full">
     <h1 class="text-center text-4xl font-bold py-4 px-12">
             オセロ 最弱ランキング
     </h1>
@@ -43,7 +43,7 @@
         <div class="flex flex-col gap-4">
             {#if stats}
                 <Statistics {stats}/>
-                <Chart {stats} {ranking}/>
+                <Chart {ranking}/>
             {/if}
         </div>
     </div>
