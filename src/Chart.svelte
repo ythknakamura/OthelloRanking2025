@@ -72,7 +72,7 @@
                         },
                         grid: {
                             display: true,
-                        }
+                        },
                     }
                 }
             }

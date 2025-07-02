@@ -24,6 +24,11 @@
                     legend:{
                         position: 'top',
                         display: true,
+                        labels:{
+                            font:{
+                                size:6
+                            }
+                        }
                     },
                     tooltip:{
                         enabled: true,
@@ -52,13 +57,13 @@
 
 <Card class="bg-gray-50 shadow-lg rounded-2xl py-4 pl-8 max-w-full">
     <h2 class="text-xl font-bold mb-2">統計情報</h2>
-    <dl class="ml-4 leading-8">
+    <dl class="ml-4 leading-6">
         <dt>ゲーム総数</dt><dd>{total}回</dd>
         <dt>プレーヤの負け</dt><dd>{stats.lose}回 ({(stats.lose/total*100).toFixed(1)}%)</dd>
         <dt>AIの負け</dt><dd>{stats.win}回 ({(stats.win/total*100).toFixed(1)}%)</dd>
         <dt>引き分け</dt><dd>{stats.draw}回 ({(stats.draw/total*100).toFixed(1)}%)</dd>
     </dl>
-    <canvas bind:this={canvas} width="100%" height="15%" class="mt-4 mr-4"></canvas>
+    <canvas bind:this={canvas} width="100%" height="25%" class="mt-2 mr-4"></canvas>
 </Card>
 
 <style>

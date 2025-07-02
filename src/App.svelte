@@ -25,7 +25,7 @@
 </script>
 
 <main class="bg-green-100 fixed flex flex-col h-svh w-full">
-    <h1 class="text-center text-4xl font-bold py-4 px-12">
+    <h1 class="text-center text-4xl font-bold py-8 px-12">
             オセロ 最弱ランキング
     </h1>
     <div class="grow mx-8 grid gap-6 grid-cols-[2fr_1fr]">
@@ -34,7 +34,7 @@
             {#if lastResult}
                 <GameResult result={lastResult} {ranking}/>
             {/if}
-            <div class="max-h-[70%]">
+            <div class="max-h-[50%]">
                 <Ranking {ranking}/>
             </div>
         </div>
