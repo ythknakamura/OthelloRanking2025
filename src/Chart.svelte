@@ -5,6 +5,8 @@
     
     let {ranking}:{ranking:Result[]} = $props();
     let canvas:HTMLCanvasElement;
+    let chart:ChartJS|null = null;
+
     const bins = [
         {label:"-64 〜 -49", min:-64, max:-49},
         {label:"-48 〜 -33", min:-48, max:-33},
@@ -29,7 +31,8 @@
     });
     ChartJS.register(...registerables);
     $effect(()=>{
-        new ChartJS(canvas!, {
+        if(chart) chart.destroy();
+        chart = new ChartJS(canvas!, {
             type: 'bar',
             data: {
                 labels: bins.map(b=>b.label),

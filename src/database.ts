@@ -58,22 +58,21 @@ export async function createStores(){
         {event: 'INSERT', schema: 'public', table: 'Ranking'}, 
         (payload) => {
             const newResult = convertRawResultToResult(payload.new as RawResult);
+            console.log('Change received!', newResult);
             rankingStore.update((data)=>{
-                data.push(newResult);
-
+                data = [...data, newResult];
+                data.sort((a, b) => b.score - a.score);
                 return data;
             });
 
             lastResultStore.set(newResult);
             
             statsStore.update((stats)=>updateStats([newResult], stats));
-
-            console.log('Change received!', newResult);
         }).subscribe();
     return {rankingStore,lastResultStore,statsStore};
 }
 
 
 export function unsubscribe(){
-    supabase.removeChannel(realtimeChannel);
+    //supabase.removeChannel(realtimeChannel);
 }

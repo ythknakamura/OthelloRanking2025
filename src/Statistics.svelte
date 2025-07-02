@@ -5,10 +5,12 @@
     let {stats}:{stats:Stats} = $props();
     let total = $state(stats.win + stats.draw + stats.lose);
     let canvas:HTMLCanvasElement;
+    let chart:ChartJS|null = null;
 
     ChartJS.register(...registerables);
     $effect(()=>{
-        new ChartJS(canvas!, {
+        if(chart) chart.destroy();
+        chart = new ChartJS(canvas!, {
             type: 'bar',
             data: {
                 labels:['敗率'],

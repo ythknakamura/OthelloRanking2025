@@ -34,9 +34,7 @@
             {#if lastResult}
                 <GameResult result={lastResult} {ranking}/>
             {/if}
-            <div class="max-h-[50%]">
-                <Ranking {ranking}/>
-            </div>
+            <Ranking {ranking}/>
         </div>
 
         <!--右側-->
