@@ -17,6 +17,7 @@
         rankingStore.subscribe((value) => ranking = value);
         statsStore.subscribe((value) => stats = value);
         //console.log('Ranking store initialized', ranking, lastResult, stats);
+        setTimeout(()=>location.reload(), 10*60*1000);
     });
     onDestroy(() => {
         unsubscribe();
@@ -24,7 +25,7 @@
     });
 </script>
 
-<main class="bg-green-100 fixed flex flex-col h-svh w-full">
+<main class="fixed flex flex-col h-svh w-full">
     <h1 class="text-center text-4xl font-bold py-8 px-12">
             オセロ 最弱ランキング
     </h1>

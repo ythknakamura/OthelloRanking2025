@@ -85,5 +85,5 @@
 
 <Card class="bg-gray-50 shadow-lg rounded-2xl py-4 pl-4 pr-6 max-w-full">
     <h2 class="text-xl font-bold mb-2">弱さの度数分布</h2>
-    <canvas bind:this={canvas} width="100%" height="70%"></canvas>
+    <canvas bind:this={canvas} width="100%" height="80%"></canvas>
 </Card>

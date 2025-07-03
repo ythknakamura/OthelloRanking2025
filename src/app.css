@@ -38,7 +38,7 @@
 
 @layer components{
   body{
-    @apply text-gray-700
+    @apply text-gray-700 bg-green-100
   }
   h2{
     @apply text-xl font-bold mb-2
