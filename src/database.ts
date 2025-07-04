@@ -9,16 +9,26 @@ const realtimeChannel = supabase.channel('update-ranking');
 
 async function fetchAllResults(){
     const {data, error} = await supabase.from('Ranking').select();
-    if(error){
+    if(data){
+        const rawResults: RawResult[] = [];
+        for(const d of data){
+            rawResults.push({
+                created_at: d.created_at,
+                black: d.black,
+                white: d.white,
+                player: d.player,
+                type: d.type ?? 1
+            });
+        }
+        return rawResults;
+    }
+    else{        
         console.error(error);
         throw new Error('Failed to fetch ranking data');
     }
-    else{
-        return data as RawResult[];
-    }
 }
 
-function convertRawResultToResult({created_at, black, white, player}: RawResult): Result {
+function convertRawResultToResult({created_at, black, white, player, type}: RawResult): Result {
     const score = player === 'black' ? white - black : black - white;
     const date = new Date(created_at);
     const dateStr = date.toLocaleDateString('ja-JP', {
@@ -28,19 +38,32 @@ function convertRawResultToResult({created_at, black, white, player}: RawResult)
         minute: '2-digit',
         timeZone: 'Asia/Tokyo'
     });
-    return {score, dateStr, black, white};
+    return {score, dateStr, black, white, type};
 }
 
-function updateStats(results:Result[], stats:Stats={win:0,draw:0, lose:0}):Stats{
+function updateStats(results:Result[], stats:Stats={win1:0, draw1:0, lose1:0, win2:0, draw2:0, lose2:0}):Stats{
     results.forEach((result)=>{
-        if(result.score > 0){
-            stats.lose++;
-        }
-        else if(result.score < 0){
-            stats.win++;
+        if(result.type === 1){
+            if(result.score > 0){
+                stats.lose1++;
+            }
+            else if(result.score < 0){
+                stats.win1++;
+            }
+            else{
+                stats.draw1++;
+            }
         }
         else{
-            stats.draw++;
+            if(result.score > 0){
+                stats.lose2++;
+            }
+            else if(result.score < 0){
+                stats.win2++;
+            }
+            else{
+                stats.draw2++;
+            }
         }
     });
     return stats;

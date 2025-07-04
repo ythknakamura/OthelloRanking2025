@@ -2,7 +2,10 @@
     import {Card} from "flowbite-svelte";
     import type {Result} from "./libs";
     let {result, ranking}:{result:Result, ranking:Result[]} = $props();
-    let order = $state(ranking.findIndex((r) => r.score === result.score) + 1);
+    let filteredRanking = $derived(
+        ranking.filter(r => result.type === r.type)
+    );
+    let order = $derived(filteredRanking.findIndex((r) => r.score === result.score) + 1);
 </script>
 
 <Card class="bg-gray-50 shadow-lg rounded-2xl py-4 px-8 max-w-full">
@@ -23,8 +26,10 @@
                 引き分け
             {:else if (result.score > 0)}
                 プレーヤー
+            {:else if result.type === 2}
+                やや弱いAI
             {:else}
-                AI
+                最弱のAI
             {/if}
         </dd>
     </dl>

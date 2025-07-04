@@ -1,9 +1,9 @@
 <script lang="ts">
     import {Card} from "flowbite-svelte";
     import {Chart as ChartJS, registerables} from "chart.js";
-    import type {Result} from "./libs";
+    import type {Result, ModeType} from "./libs";
     
-    let {ranking}:{ranking:Result[]} = $props();
+    let {ranking, mode}:{ranking:Result[], mode:ModeType} = $props();
     let canvas:HTMLCanvasElement;
     let chart:ChartJS|null = null;
 
@@ -21,11 +21,13 @@
         const freq = new Array(bins.length).fill(0);
         ranking.forEach((result)=>{
             const score = result.score;
-            bins.forEach((bin, index)=>{
-                if(score >= bin.min && score <= bin.max){
-                    freq[index]++;
-                }
-            });
+            if(mode===0 || result.type === mode){
+                bins.forEach((bin, index)=>{
+                    if(score >= bin.min && score <= bin.max){
+                        freq[index]++;
+                    }
+                });
+            }
         });
         return freq;
     });
