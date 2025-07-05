@@ -16,7 +16,7 @@ async function fetchAllResults(){
                 created_at: d.created_at,
                 black: d.black,
                 white: d.white,
-                player: d.player,
+                player: d.player[0]=== 'b' ? 'black' : 'white',
                 type: d.type ?? 1
             });
         }
